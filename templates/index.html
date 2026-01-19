@@ -1,0 +1,38 @@
+{{define "content"}}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-1 has-text-centered">Enciclopedia de Amenazas</h1>
+        <p class="subtitle has-text-centered mb-6">
+            Analiza y mitiga los riesgos más comunes en la web moderna.
+        </p>
+
+        <div class="columns is-multiline">
+            {{range .}}
+            <div class="column is-one-quarter">
+                <div
+                    class="card"
+                    style="height: 100%; display: flex; flex-direction: column"
+                >
+                    <div class="card-content" style="flex-grow: 1">
+                        <p class="title is-5">{{.Titulo}}</p>
+                        <p class="is-size-7 has-text-grey-light">
+                            {{.Descripcion}}
+                        </p>
+                    </div>
+                    <footer
+                        class="card-footer"
+                        style="border-top: 1px solid #333"
+                    >
+                        <a
+                            href="/concepto/{{.Slug}}"
+                            class="card-footer-item has-text-primary"
+                            >Ver Detalles</a
+                        >
+                    </footer>
+                </div>
+            </div>
+            {{end}}
+        </div>
+    </div>
+</section>
+{{end}}

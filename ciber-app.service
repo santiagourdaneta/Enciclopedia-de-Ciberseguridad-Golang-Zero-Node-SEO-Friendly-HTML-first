@@ -1,0 +1,17 @@
+[Unit]
+Description=Servidor Go de Ciberseguridad
+After=network.target
+
+[Service]
+# Ejecutar como usuario sin privilegios para mayor seguridad
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/ciber-app
+ExecStart=/var/www/ciber-app/ciber-app
+Restart=always
+# Limitar recursos para evitar ataques de agotamiento (DoS)
+MemoryLimit=50M
+CPUQuota=10%
+
+[Install]
+WantedBy=multi-user.target

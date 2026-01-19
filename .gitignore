@@ -1,0 +1,20 @@
+# Binarios
+main
+ciber-app
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Herramientas de build
+build/
+dist/
+
+# Logs y temporales
+*.log
+tmp/
+
+# IDEs
+.vscode/
+.idea/

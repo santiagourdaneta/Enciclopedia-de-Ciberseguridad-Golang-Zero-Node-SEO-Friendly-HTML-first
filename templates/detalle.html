@@ -1,0 +1,67 @@
+{{define "content"}}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-2 has-text-primary">{{.Titulo}}</h1>
+
+        <div>
+            <div>
+                <div class="content box has-background-dark">
+                    <h3 class="has-text-info">Descripción</h3>
+                    <p>{{.Descripcion}}</p>
+
+                    <h3 class="has-text-success">
+                        Pasos para Prevenir (Mitigación)
+                    </h3>
+                    <ul>
+                        {{range .Mitigacion}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                    <div class="buttons mt-5">
+                        <a href="/" class="button is-light is-outlined"
+                            >← Volver al Índice</a
+                        >
+                    </div>
+                    <a
+                        href="{{.OwaspURL}}"
+                        target="_blank"
+                        class="button is-small is-link is-outlined"
+                    >
+                        📚 Ver en OWASP Oficial
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function escanearCodigo() {
+        const codigo = document.getElementById("userInput").value;
+        const resDiv = document.getElementById("result");
+
+        // Simulación de llamada al backend de Go
+        fetch("/scan", {
+            method: "POST",
+            body: new URLSearchParams({ codigo: codigo }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                resDiv.className = `notification mt-4 ${data.status === "peligroso" ? "is-danger" : "is-success"}`;
+                resDiv.innerText = data.msg;
+                resDiv.classList.remove("is-hidden");
+            });
+    }
+
+    function ejecutarSandbox() {
+        const codigo = document.getElementById("userInput").value;
+        // Sandbox visual: solo muestra qué pasaría sin ejecutarlo realmente en el cliente principal
+        alert(
+            "SISTEMA AISLADO: El código ingresado intentó acceder a: " +
+                (codigo.includes("cookie")
+                    ? "Tus Cookies de Sesión"
+                    : "Recursos del sistema"),
+        );
+    }
+</script>
+{{end}}
